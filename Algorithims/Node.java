@@ -2,10 +2,10 @@
 public class Node {
   /** Pointer to the next node in the
       list. */
-  private Node next = null;
+  public Node next = null;
 
   /** Data associated with the node. */
-  private Object data;
+  public Object data;
 
   /** Get/Set the pointer to the next node
 	   in the list. */

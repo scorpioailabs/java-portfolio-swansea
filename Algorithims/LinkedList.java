@@ -1,77 +1,82 @@
+// Linked List
 public class LinkedList {
 	private Node first;
 	private int n;
 	private int m;
 
 	private class Node {
-	int item;
-	Node next;
-	Node(int i) { item = i; next = null; }
+		Object data;
+		Node next;
 	}
 
-	public void insertNode(Node new_node) {
-		Node current;
-		if (first == null) {
-			new_node.next = first;
-			first = new_node;
+	public void insert(Object data) {
+		Node node  = new Node();
+		node.data = data;
+		node.next = null;
+		if (first== null) {
+			first = node;
 		}
 		else {
-			current = first;
-
-			while (current.next != null) 
-			{
-				current = current.next;
-			}			
-			new_node.next = current.next;
-			current.next = new_node;
+			Node n = first;
+			while(n.next!= null) {
+				n = n.next;
+			}
+			n.next = node;
 		}
 	}
 
-	//function to create a node
+	public void insertAtStart(Object data) {
+		Node node  = new Node();
+		node.data = data;
+		node.next = null;
+		node.next = first;
+		first = node;
+	}
+	public void insertAt(int index, Object data) {
+		Node node  = new Node();
+		node.data = data;
+		node.next = null;
 
-	Node newNode(int item) {
-		Node x = new Node(item);
-		return x;
+		if (index ==0) {
+			insertAtStart(data);
+			return;
+		}
+
+		Node n = first;
+		for(int i=0; i < index-1; ++i) {
+			n = n.next;
+		}
+		node.next = n.next;
+		n.next = node;
+	}
+
+	// removing node
+	public void deleteAt(int index) {
+		if(index==0) {
+			first = first.next;
+		}
+		else {
+			Node n = first;
+			Node n1 = null;
+			for (int i = 0; i< index-1; i++) {
+				n = n.next;
+			}
+			n1 = n.next;
+			n.next = n1.next;
+		}
 	}
 
 	//function for printing linked list
 
 	void printList() {
-		Node temp = first;
-		while (first != null) 
+		Node node = first;
+		while (node.next != null) 
 		{
-			System.out.print(temp.item+" ");
-			temp = temp.next;
+			System.out.println(node.data + " ");
+			node = node.next;
 		}
+		System.out.println(node.data);
 	}
 
-	private int length(Node x) {
-		int length = 0;
-		while (first != null) {
-			length ++;
-			first = first.next;
-		}
-		return length;
-	}
-
-	//Test client 
-
-	public static void main(String[] args) {
-		LinkedList l1 = new LinkedList();
-		Node new_node;
-		int n = length(l1);
-		// while (!StdIn.isEmpty()) {
-		// 	int i = StdIn.readInt();
-
-		// }
-		new_node = l1.newNode(5);
-		l1.insertNode(new_node);
-		new_node = l1.newNode(10);
-		l1.insertNode(new_node);
-
-		System.out.println("Created Linked List");
-		System.out.println(i);
-		l1.printList();
-	}
 }
 
