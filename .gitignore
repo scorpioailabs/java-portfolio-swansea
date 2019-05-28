@@ -79,6 +79,9 @@ acs-*.bib
 # fixme
 *.lox
 
+# Ignore all text files
+*.txt
+
 # feynmf/feynmp
 *.mf
 *.mp
