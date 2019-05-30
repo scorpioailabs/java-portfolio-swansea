@@ -59,7 +59,6 @@ public class SinglyLinkedList {
 	public static void main(String[] args) {
 		SinglyLinkedList l1 = new SinglyLinkedList();
 		Node new_node;
-		int n = length(l1);
 		// while (!StdIn.isEmpty()) {
 		// 	int i = StdIn.readInt();
 
@@ -68,9 +67,13 @@ public class SinglyLinkedList {
 		l1.insertNode(new_node);
 		new_node = l1.newNode(10);
 		l1.insertNode(new_node);
-
+		new_node = l1.newNode(13);
+		l1.insertNode(new_node);
+		new_node = l1.newNode(19);
+		l1.insertNode(new_node);
 		System.out.println("Created Linked List");
-		System.out.println(i);
+		l1.printList();
+		System.out.println("Split the list! :");
 		l1.printList();
 	}
 }

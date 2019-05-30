@@ -5,4 +5,5 @@ public interface StackInterface {
 	public void push(Object obj);
 	public Object top();
 	public Object pop();
+	// public void printStack();
 }

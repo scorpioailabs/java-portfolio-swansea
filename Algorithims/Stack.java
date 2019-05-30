@@ -1,46 +1,36 @@
 //Stack
-public class Stack<Item> {
+public class Stack implements StackInterface {
 	private Node first; // top of stack (most recently added node)
-	private	int n; // Number of items
+	private	int n; // Number of objs
 	private class Node {
 		// nested class to define nodes
-		Item item;
+		Object obj;
 		Node next;
 	}
 	public boolean isEmpty() { return first == null; }
 	public int size()		 {	return n;	}
-
-	public void push(Item item) {
-		// Add item to top of stack
+	public void push(Object obj) {
+		// Add obj to top of stack
 		Node oldfirst = first;
 		first = new Node();
-		first.item = item;
+		first.obj = obj;
 		first.next = oldfirst;
 		n++;
 	}
-	public Item pop(Item item) {
-		// Remove item from top of stack
-		item = first.item;
+	public Object pop() {
+		// Remove obj from top of stack
+		Object obj = first.obj;
 		first = first.next;
 		n--;
-		return item;
+		return obj;
 	}
 	public void printStack() {
 		//Traverse the list c.f. traversing an array
 		for (Node node = first; node != null; node = node.next) {
-			System.out.println(node.item+" ");
+			System.out.println(node.obj+" ");
 		}
 	}
-	// test client
-	public static void main(String[] args) {
-		Stack<String> s = new Stack<String>();
-		while(!StdIn.isEmpty()) {
-			String item = StdIn.readString();
-			if (!item.equals("-"))
-				s.push(item);
-			else if (!s.isEmpty()) StdOut.print(s.pop(item) + " ");
-		}
-		StdOut.println("(" + s.size() + " left on stack)");
-		s.printStack();
+	public Object top() {
+		return first.obj;
 	}
 } 

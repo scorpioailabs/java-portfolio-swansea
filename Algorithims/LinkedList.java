@@ -4,6 +4,15 @@ public class LinkedList {
 	private int n;
 	private int m;
 
+/** Constructor */
+	public LinkedList() {
+		first = null;
+	}
+
+	public LinkedList(Node newNode) {
+		first = newNode;
+	}
+
 	private class Node {
 		Object data;
 		Node next;
@@ -66,6 +75,19 @@ public class LinkedList {
 		}
 	}
 
+	// split in to two
+	public LinkedList splitAfter(int pos) {
+		Node tmpNode = first;
+		int i =0;
+		while (i < pos) {
+			tmpNode = tmpNode.next;
+			i = i + 1;
+		}
+		LinkedList newList = new LinkedList(tmpNode.next);
+		tmpNode.next = null;
+		return newList;
+	}
+
 	//function for printing linked list
 
 	void printList() {
@@ -77,6 +99,5 @@ public class LinkedList {
 		}
 		System.out.println(node.data);
 	}
-
 }
 
