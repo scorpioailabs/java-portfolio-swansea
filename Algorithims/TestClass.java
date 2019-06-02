@@ -63,6 +63,7 @@ class TestClass {
 
 	
 	//minHeapify ---> smallest K element goes to root
+	// "push-down" "trickledown" "sortdown"
 	private void minHeapify(int [] arr, int i, int size) {
 		int minIndex = i;
 		int leftChildIndex = leftChild(i);
@@ -87,6 +88,7 @@ class TestClass {
 
 
 	//maxHeapify ---> largest K element goes to root
+	// "push-up" "trickleup" "sortup"
 	private void maxHeapify(int [] arr, int i, int size) {
 		int largestElementIndex = i; 
 		int leftChildIndex = leftChild(i);
@@ -112,7 +114,8 @@ class TestClass {
     public static void main(String args[] ) throws Exception {
 		
 		int K = Integer.parseInt(args[0]);
-		int myArray[] = FastRead.FastReadArray(args[1]);
+		// int myArray[] = FastRead.FastReadArray(args[1]);
+		int myArray [] = { 12, 4, 3, 7, 14, 5, 9};
 		int N = myArray.length;
 		int i = 0;
 		
@@ -125,13 +128,14 @@ class TestClass {
 		int kMax[] = t.kMaxElements(myArray, K); //get K biggest elements in myArray.
 		int xorsum = 0; //initialise xorsum to 0.  ---> sum of XOR operations.
 		//iterate through both arrays and calculate xorsum for each element respectively
-		while (i < K) {
-			xorsum = xorsum ^ kMin[i] ^ kMax[i];
-			i++;
-		}
-		System.out.println(xorsum);	
+		// while (i < K) {
+		// 	xorsum = xorsum ^ kMin[i] ^ kMax[i];
+		// 	i++;
+		// }
+		// System.out.println(xorsum);
+		SortingClient sc = new SortingClient();
 		// ----------
-		
+		sc.printArray(kMax);
 		double time = st.elapsedTime();
 		System.err.println("Elapsed Time: "+time+" s");			
 	}
