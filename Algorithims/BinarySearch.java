@@ -25,7 +25,7 @@ public class BinarySearch {
 				return binarySearch(arr, mid + 1, r, x);
 		}
 
-		// if present is not present in array  == base case
+		// base case = if present is not present in array  
 		return -1;
 	}
 

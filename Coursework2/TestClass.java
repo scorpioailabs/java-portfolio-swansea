@@ -1,88 +1,142 @@
-import java.io.*; 
-import java.util.*; 
-public class TestClass {
-
-	public static int getMax(int arr[], int n) {
-        int mx = arr[0]; 
-        for (int i = 1; i < n; i++) 
-            if (arr[i] > mx) 
-                mx = arr[i]; 
-        return mx;		
+class TestClass {
+	//-----Initiliasing the indices leftChild and rightChild in heap-----
+	public int leftChild(int i) {
+		return 2 * i + 1;
+	}
+	public int rightChild(int i) {
+		return 2 * i + 2;
 	}
 
-	public	static	int getMin(int arr[], int n) {
-		int mn = arr[0];
-        for (int i = 1; i < n; i++) 
-            if (arr[i] < mn) 
-                mn = arr[i]; 
-        return mn;	
+	//get array of largest K elements from input array
+	public int[] kMaxElements(int[] arr, int k) {
+		//build minHeap of size k O(k)
+		for (int i = k -1; i>=0; i--) {
+			minHeapify(arr, i, arr.length);
+		}
+		//beginning at K, check if i element is grater than arr[0] 
+		for(int i = k; i < arr.length; i++) {
+			if(arr[0] < arr[i]) {
+				//ith element is greater than root, thus replace root with ith element
+				int temp;
+				temp = arr[0];
+				arr[0] = arr[i];
+				arr[i] = temp;
+				//call heapify on the first k elements, which will place smallest K element in K elements at root (i.e. arr[0])
+				minHeapify(arr, 0, k);
+			}
+		}
+		//return an output array of K max elements
+		int[] output = new int[k];
+		for (int i = 0; i < k; i ++) {
+			//place first K arr elements in output array
+			output[i] = arr[i]; 
+		}
+		return output;
 	}
 
-	public static int[] countSort(int arr[], int n, int exp) {
-        int output[] = new int[n]; // output array 
-        int i; 
-        int count[] = new int[10]; 
-        Arrays.fill(count,0); 
-  
-        // Store count of occurrences in count[] 
-        for (i = 0; i < n; i++) 
-            count[ (arr[i]/exp)%10 ]++; 
-  
-        // Change count[i] so that count[i] now contains 
-        // actual position of this digit in output[] 
-        for (i = 1; i < 10; i++) 
-            count[i] += count[i - 1]; 
-  
-        // Build the output array 
-        for (i = n - 1; i >= 0; i--) 
-        { 
-            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
-            count[ (arr[i]/exp)%10 ]--; 
-        } 
-  
-        // Copy the output array to arr[], so that arr[] now 
-        // contains sorted numbers according to curent digit 
-        for (i = 0; i < n; i++){
-            arr[i] = output[i];
-        }
-        return arr;
+	//get array of smallest K elements from input array 
+	public int[] kMinElements(int[]arr, int k) {
+		//build maxHeap of size k O(k)
+		for(int i = k -1; i >=0; i--) {
+			maxHeapify(arr, i, arr.length);
+		}
+		//beginning at K, check if i element is smaller than arr[0].
+		for(int i = k; i < arr.length; i++) {
+			if(arr[i] < arr[0]) { 
+				//if current element is smaller than root then replace root with it
+				int temp;
+				temp = arr[0];
+				arr[0] = arr[i];
+				arr[i] = temp;
+				//call heapify on the first k elements, place largest K element in K elements at root
+				maxHeapify(arr, 0, k); 
+			}
+		}
+		//return an output array of K max elements
+		int[] output = new int[k];
+		for (int i = 0; i < k; i ++) {
+			//place first K arr elements in output array
+			output[i] = arr[i]; 
+		}
+		return output;
 	}
 
-	public static int[] radixsort(int arr[], int n){
-		int m = getMax(arr, n);
-		for (int exp = 1; m/exp > 0; exp *= 10) 
-			countSort(arr, n, exp);
-		return arr;
+	
+	//minHeapify ---> smallest K element goes to root
+	// "push-down" "trickledown" "sortdown"
+	private void minHeapify(int [] arr, int i, int size) {
+		int minIndex = i;
+		int leftChildIndex = leftChild(i);
+		int rightChildIndex = rightChild(i);
+		if(leftChildIndex < size && arr[leftChildIndex] < arr[minIndex]) {
+			minIndex = leftChildIndex;
+		}
+		if(rightChildIndex < size && arr[rightChildIndex] < arr[minIndex]) {
+			minIndex = rightChildIndex;
+		}
+
+		if (minIndex != i) {
+			// SWAP			
+			int temp = arr[i];
+			arr[i] = arr[minIndex];
+			arr[minIndex] = temp;
+			
+			//Recursively heapify
+			minHeapify(arr, minIndex, size); 
+		}
 	}
 
-		//test client
+
+	//maxHeapify ---> largest K element goes to root
+	// "push-up" "trickleup" "sortup"
+	private void maxHeapify(int [] arr, int i, int size) {
+		int largestElementIndex = i; 
+		int leftChildIndex = leftChild(i);
+		int rightChildIndex = rightChild(i);
+		if(leftChildIndex < size && arr[leftChildIndex] > arr[largestElementIndex]) {
+			largestElementIndex = leftChildIndex;
+		}
+
+		if(rightChildIndex < size && arr[rightChildIndex] > arr[largestElementIndex]) {
+			largestElementIndex = rightChildIndex;
+		}
+		if(largestElementIndex != i) {
+			//SWAP
+			int temp = arr[i];
+			arr[i] = arr[largestElementIndex];
+			arr[largestElementIndex] = temp;
+			//recursively heapify for the affected point
+			maxHeapify(arr, largestElementIndex, size);
+		}
+	}
+
+	//Test Client 
     public static void main(String args[] ) throws Exception {
 		
 		int K = Integer.parseInt(args[0]);
-		int myArray[] = FastRead.FastReadArray(args[1]);
+		// int myArray[] = FastRead.FastReadArray(args[1]);
+		int myArray [] = { 12, 4, 3, 7, 14, 5, 9};
 		int N = myArray.length;
-		int[] sorted = radixsort(myArray, N);
 		int i = 0;
 		
 		Stopwatch st = new Stopwatch();
 		
-		// ----- Your Code Here -----
-		int xorsum = 0;
-		// first K numbers of sorted array i.e. the lowest, if the array is in ascending order
+		// ---------
+		TestClass t = new TestClass();
+		//Inputs
+		int kMin[] = t.kMinElements(myArray, K); //get K smallest elements in myArray.
+		int kMax[] = t.kMaxElements(myArray, K); //get K biggest elements in myArray.
+		int xorsum = 0; //initialise xorsum to 0.  ---> sum of XOR operations.
+		//iterate through both arrays and calculate xorsum for each element respectively
 		while (i < K) {
-			xorsum = xorsum ^ myArray[i];
-			i++;
-		}
-		//end while. set i to now equal the first K number of the largest K numbers in the sorted array. 
-		i = N -K;
-		while (i < N) {
-			xorsum = xorsum ^ myArray[i];
+			xorsum = xorsum ^ kMin[i] ^ kMax[i];
 			i++;
 		}
 		System.out.println(xorsum);
-		// ----- Your Code Here -----		
+		SortingClient sc = new SortingClient();
+		// ----------
+		
 		double time = st.elapsedTime();
 		System.err.println("Elapsed Time: "+time+" s");			
 	}
-
 }

@@ -39,6 +39,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	*/
 	private Value get(Node x, Key key)
 	{
+		//search routine!
 		if(x == null) return null;
 		int cmp = key.compareTo(x.key);
 		// if y =< x(v)

@@ -88,6 +88,18 @@ public class LinkedList {
 		return newList;
 	}
 
+	int count(Object search_for) 
+	{ 
+	    Node current = first; 
+	    int count = 0; 
+	    while (current != null) { 
+	        if (current.data == search_for) 
+	            count++; 
+	        current = current.next; 
+	    } 
+	    return count; 
+	}
+
 	//function for printing linked list
 
 	void printList() {

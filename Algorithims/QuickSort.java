@@ -14,7 +14,6 @@ public class QuickSort {
 	    {
 	    	int pivot = arr[low];
 	    	int i = low+1; int temp;
-
 	    	// parition array
 	    	for (int j=low + 1; j<=high; j++) 
 	    	{ 
@@ -31,7 +30,6 @@ public class QuickSort {
 	    	}
 	    	arr[low] = arr[i-1];
 	    	arr[i-1] = pivot;
-	
 	         // Recursively sort elements on left and right sides
 	        quickSort(arr, low, i-2); 
 	        quickSort(arr, i, high); 
