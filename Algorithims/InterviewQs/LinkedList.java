@@ -183,6 +183,25 @@ public class LinkedList {
 		return head;
 	}
 
+	//find middle element of linkedlist
+	public Node middle()
+	//use two pointers
+	{
+		//set slow and fast pointers to head initially
+		Node slowPtr = head;
+		Node fastPtr = head;
+		if(head != null)
+		{
+			while(fastPtr != null && fastPtr.next != null)
+			{
+				//faster pointer moves.... faster!
+				fastPtr = fastPtr.next.next;
+				slowPtr = slowPtr.next;
+			}
+		}
+		return slowPtr;
+	}
+
 	//client code
 	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
@@ -192,6 +211,7 @@ public class LinkedList {
 		list.insert((int)9);
 		list.insert((int)2);
 		list.insert((int)10);
+		list.insert((int)12);
 		System.out.println("Original Linked List: ");
 		list.printList(list.head);
 		// Node newHead = reverse(list.head);
@@ -200,6 +220,9 @@ public class LinkedList {
 		System.out.println("The recursive approach:");
 		Node recHead = list.recursiveReverse(list.head, null);
 		list.printList(recHead);
+		System.out.println("The middle elment of the reversed list is:");
+		Node midNode = list.middle();
+		System.out.println(midNode.data);
 	}
 }
 

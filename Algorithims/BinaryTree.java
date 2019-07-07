@@ -1,6 +1,6 @@
 //A binary search Tree algorithm
-public class BST<Key extends Comparable<Key>, Value> {
-	private Node root;					//root of BST
+public class BinaryTree<Key extends Comparable<Key>, Value> {
+	private Node root;					//root of BinaryTree
 	private class Node {
 		private Key key;				// key
 		private Value val;				// associated value
@@ -57,7 +57,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		root  = put(root, key, val);
 	}
 
-	/* This method searches BST and inserts a key's value
+	/* This method searches BinaryTree and inserts a key's value
 	* with search value if in subtree, else, it addes a new
 	* node to subtree associating the key with the search value.
 	*/
@@ -194,9 +194,9 @@ public class BST<Key extends Comparable<Key>, Value> {
 	//!!!Successor of x is the node with the smallest key in its right subtree
 	
 
-	// TRAVERSAL ALGORITHMS FOR BST
+	// TRAVERSAL ALGORITHMS FOR BinaryTree
 	/*
-	* Print the keys in a BST in order
+	* Print the keys in a BinaryTree in order
 	* logic: print all keys in left subtree
 	* (which are less than key at root)
 	* then print the key at root, then print
@@ -211,7 +211,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 
 	/*
-	* Print the keys in a BST in pre-order
+	* Print the keys in a BinaryTree in pre-order
 	*/
 	private void printPreOrderKey(Node x)
 	{
@@ -223,7 +223,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 
 	/*
-	* Print the keys in a BST in post-order
+	* Print the keys in a BinaryTree in post-order
 	* Can be used to solve expression tree evaluation problem
 	*/
 	private void printPostOrderKey(Node x)
@@ -236,9 +236,63 @@ public class BST<Key extends Comparable<Key>, Value> {
 		System.out.println(x.key + " ");
 	}
 
+	//inorder traversal using recursion
+	private void inOrderTraverseTree(Node x)
+	{
+		if(x == null)
+			return;
+		inOrderTraverseTree(x.left);
+		System.out.println(x.val + " has key " + x.key);
+		inOrderTraverseTree(x.right);
+	}
+
+	//preorder traversal using recursion
+	private void preOrderTraverseTree(Node x)
+	{
+		if (x==null)
+			return;
+		System.out.println(x.val + " has key " + x.key);
+		preOrderTraverseTree(x.left);
+		preOrderTraverseTree(x.right);
+
+	}
+
+	//postorder traversal using recursion
+	private void postOrderTraverseTree(Node x)
+	{
+		if (x==null)
+			return;
+		postOrderTraverseTree(x.left);
+		postOrderTraverseTree(x.right);
+		System.out.println(x.val + " has key " + x.key);
+	}
+
+	public Node findNode(Key key)
+	{
+		return findNode(root, key);
+	}
+
+	//search!
+	private Node findNode(Node x, Key key)
+	{
+		if(x == null) return null;
+		int cmp = key.compareTo(x.key);
+		if (cmp<0) return findNode(x.left,key);
+		else if (cmp>0) return findNode(x.right,key);
+		else return x;
+	}
+
 	public static void main(String[] args) {
-		BST theTree = new BST();
-		theTree.put(3, "Boss");
+		BinaryTree<Integer, String> theTree = new BinaryTree<Integer, String>();
+		theTree.put(50, "Boss");
+		theTree.put(25,"Vice Pres");
+		theTree.put(15,"Office Manager");
+		theTree.put(30,"Secretary");
+		theTree.put(75,"Sales Manager");
+		theTree.put(85,"Salesman 1");
+		theTree.postOrderTraverseTree(theTree.root);
+		System.out.println("Search for 30");
+		System.out.println(theTree.findNode(30).val);
 	}
 
 }

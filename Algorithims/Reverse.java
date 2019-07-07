@@ -1,5 +1,5 @@
 public class Reverse {
-// Reverse a string using Stack 
+	// Reverse a string using Stack 
 	public static String reverse(String str) {
 		//base case: if String is null or empty
 		if (str == null || str.equals("")) {
@@ -26,6 +26,7 @@ public class Reverse {
 		//convert the character array into string and return it
 		return String.copyValueOf(ch);
 	}
+
 	// Reverse a string using LinkedList
 	public static void reverseList(String str)
 	{
@@ -37,7 +38,7 @@ public class Reverse {
 		list.printList();
 	}
 	// Reverse a string using split
-	public static void reverseWo(String str)
+	public static void reverseAWord(String str)
 	{
 		String[] revStr = str.split("");
 		for (int i=revStr.length-1; i>=0; i--) {
@@ -61,7 +62,7 @@ public class Reverse {
 		String input = StdIn.readString();
 		System.out.println(reverse(input));
 		rev.reverseList(input);
-		rev.reverseWo(input);
+		rev.reverseAWord(input);
 		System.out.println("");
 	}
 }

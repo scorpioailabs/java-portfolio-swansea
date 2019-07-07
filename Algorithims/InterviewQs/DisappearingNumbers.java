@@ -21,12 +21,14 @@ public class DisappearingNumbers {
     		int i = Math.abs(no)-1;
     		if(nums[i]>0)
     		{
+    			//mark the number as negative
     			nums[i] = -nums[i];
     		}    		
     	}
         for (int i =0 ; i <nums.length; i++) {
         	if(nums[i]>0)
         	{
+        		//this means it's not negative thus we haven't seen it before == 'disappearing'
         		res.add(i+1);
         	}
         }

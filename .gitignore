@@ -82,6 +82,9 @@ acs-*.bib
 # Ignore all text files
 *.txt
 
+# Ignore all bin files
+*.bin
+
 # feynmf/feynmp
 *.mf
 *.mp

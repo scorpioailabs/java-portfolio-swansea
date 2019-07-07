@@ -36,10 +36,12 @@ public class Duplicates {
 			int index = (Math.abs(nums[i]));
 			if(nums[index-1] < 0)
 			{
+				//this has been already marked as negative therefore == duplicate
 				res.add(index);
 			}
 			else
 			{
+				//if unseen mark as negative i.e. visited
 				nums[index-1] = -nums[index-1];
 			}
 		}
