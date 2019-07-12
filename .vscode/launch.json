@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SmallestPositive",
+            "request": "launch",
+            "mainClass": "InterviewQs.SmallestPositive",
+            "projectName": "java-portfolio-swansea_6f86eb65"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DisappearingNumbers",
+            "request": "launch",
+            "mainClass": "InterviewQs.DisappearingNumbers",
+            "projectName": "java-portfolio-swansea_6f86eb65"
+        }
+    ]
+}

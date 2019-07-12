@@ -59,4 +59,14 @@ public class MergeSort {
 	        merge(arr, l, m, r); 
 	    } 
 	}
+	
+	public static void main(String[] args) {
+		int[] a = { 100, 285, 412, 324, 432, 564, 21, 7, 88, 8, 56, 48, 7455, 78548, 7588, 2331, 24, 4, 480 };
+		int n = a.length;
+		MergeSort mSort = new MergeSort();
+		mSort.mergeSort(a, 0, n - 1);
+		for (int i = 0; i < n; i++) {
+			System.out.println(a[i]);
+		}
+	}
 }

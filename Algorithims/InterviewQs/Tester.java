@@ -71,3 +71,5 @@ public List<Integer> findDisappearedNums(int[]nums)
 	}
 	return res;
 }
+
+

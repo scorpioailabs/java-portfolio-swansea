@@ -12,7 +12,7 @@
 1.The basic idea is that we iterate through the input array and mark elements as negative using nums[nums[i] -1] = -nums[nums[i]-1].In this way all the numbers that we have seen will be marked as negative. 
 2.	In the second iteration, if a value is not marked as negative, it implies we have never seen that index before, so just add it to the return list.
 */
-import java.util*;
+import java.util.*;
 public class DisappearingNumbers {
     public List<Integer> findDisappearedNumbers(int[] nums) {
     	List<Integer> res = new ArrayList<Integer>();
@@ -31,10 +31,18 @@ public class DisappearingNumbers {
         		//this means it's not negative thus we haven't seen it before == 'disappearing'
         		res.add(i+1);
         	}
-        }
+		}
+		return res;
     }
     public static void main(String[] args) {
+		DisappearingNumbers dn = new DisappearingNumbers();
     	int[] test = {4,3,2,7,8,2,3,1};
-    	List<Integer> res = findDisappearedNumbers(test);
+		List<Integer> res = dn.findDisappearedNumbers(test);
+		for (int i = 0; i < res.size(); i++) {
+			
+			{
+				System.out.println(res.get(i));
+			}
+		}
     }
 }
