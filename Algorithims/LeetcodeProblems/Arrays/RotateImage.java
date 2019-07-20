@@ -31,6 +31,7 @@ public class RotateImage {
             int len = hi-lo;
             for (int i = 0; i < len; i++) {
                 int index = lo + i;
+                //index is our "pivot"
                 swap(matrix, lo + i, hi, lo, index);
                 swap(matrix, hi, hi-i, lo, index);
                 swap(matrix, hi-i, lo, lo, index); 
